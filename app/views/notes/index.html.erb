@@ -21,7 +21,7 @@
 <% @notes.each do |note| %>
   <div class='note_summary_container'>
     <span class='note_summary_title'><%= link_to note.title, edit_note_path(note.id) %></span>
-    <span class='note_summary_content'><%= note.content.truncate(180) %></span>
+    <span class='note_summary_content'><%= strip_tags note.content.truncate(180) %></span>
     <div class='delete_note' data-id='<%= note.id %>'>X</div>
   </div>
 <% end %>
