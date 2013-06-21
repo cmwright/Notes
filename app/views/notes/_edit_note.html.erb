@@ -1,0 +1,86 @@
+<%= javascript_include_tag "mousetrap.js" %>
+<script type="text/javascript">
+  $(function() {
+
+    $(".editable_field").click(function(){
+      $(this).attr('contentEditable', true);
+      if (active_element && active_element.attr('class') !== $(this).attr('class')) {
+        active_element.attr('contentEditable', false);
+      }
+      active_element = $(this);
+    });
+
+    Mousetrap.bind("command+s", function() {
+      post_note_edits();
+
+      return false;
+    });
+
+    setInterval(function(){ post_note_edits() }, 60000); // autosave every minute
+  });
+
+  var active_element = null;
+  var note_id = <%= @note.id.to_json %>;
+  var currently_ajaxing = false;
+
+  function post_note_edits() {
+    if (!currently_ajaxing) {
+      set_user_dialog('Saving...');
+      currently_ajaxing = true;
+      var note_title = $(".note_title_container").text();
+      var note_content = $(".note_content_container").html();
+
+      if (note_id === null) {
+        // first post of the note
+        $.ajax({
+          url: "/notes",
+          method: "POST",
+          dataType: "json",
+          data: {
+            note: {
+              title: note_title,
+              content: note_content
+            }
+          },
+          success: function(new_note) {
+            set_user_dialog('Saved');
+            note_id = new_note.id;
+            currently_ajaxing = false;
+          }
+        });
+      } else {
+        // make edits to an existing note
+        $.ajax({
+          url: "/notes/" + note_id,
+          method: "put",
+          dataType: "json",
+          data: {
+            note: {
+              title: note_title,
+              content: note_content
+            }
+          },
+          success: function(note) {
+            set_user_dialog('Saved');
+            currently_ajaxing = false;
+          }
+        });
+      }
+    }
+  }
+
+  var message_id = 0;
+  function set_user_dialog(message) {
+    var this_message_id = ++message_id;
+    $(".user_dialog .message").remove();
+    $(".user_dialog").append("<span class='message user_dialog" + this_message_id + "'>" + message + "</span>");
+
+    setTimeout(function() {
+      $(".user_dialog" + this_message_id).fadeOut();
+    }, 2000);
+  }
+</script>
+
+<div class='note_title_container editable_field'><%= @note.title %></div>
+<div class='note_content_container editable_field'><%= raw @note.content %></div>
+<div class='user_dialog'></div>

@@ -1,0 +1,28 @@
+<script type="text/javascript">
+  $(function() {
+    $(".delete_note").click(function() {
+      var note_id = $(this).data('id');
+      var $parent_node = $(this).parent();
+      $.ajax({
+        url: '/notes/' + note_id,
+        method: 'DELETE',
+        dataType: 'json',
+        success: function() {
+          $parent_node.remove();
+        }
+      })
+    })
+  });
+</script>
+
+<% if @notes.blank? %>
+  <div class='note_summary_container'>You don't have any notes yet!</div>
+<% end %>
+<% @notes.each do |note| %>
+  <div class='note_summary_container'>
+    <span class='note_summary_title'><%= link_to note.title, edit_note_path(note.id) %></span>
+    <span class='note_summary_content'><%= note.content.truncate(180) %></span>
+    <div class='delete_note' data-id='<%= note.id %>'>X</div>
+  </div>
+<% end %>
+<%= link_to 'Create a Note', new_note_path %>

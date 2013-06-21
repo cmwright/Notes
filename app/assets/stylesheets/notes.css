@@ -1,0 +1,43 @@
+body {
+  font-family: 'Open Sans', Courier, monospace;
+  margin-left: 300px;
+  width: 60%;
+}
+
+.user_dialog {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.note_summary_container {
+  padding: 10px;
+  position: relative;
+}
+
+.note_summary_title {
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.delete_note {
+  position: absolute;
+  top: 4px;
+  right: -2px;
+  border: 1px solid black;
+  padding: 0px 6px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.editable_field {
+  padding: 15px;
+  font-size: 20px;
+  color: #424242;
+  outline: 0px solid transparent;
+}
+
+.note_title_container {
+  font-weight: bold;
+  font-size: 150%;
+}
