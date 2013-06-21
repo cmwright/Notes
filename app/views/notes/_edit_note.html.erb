@@ -1,5 +1,6 @@
 <%= javascript_include_tag "mousetrap.js" %>
 <script type="text/javascript">
+  var autosave_interval = null;
   $(function() {
 
     $(".editable_field").click(function(){
@@ -16,7 +17,7 @@
       return false;
     });
 
-    setInterval(function(){ post_note_edits() }, 60000); // autosave every minute
+    autosave_interval = setInterval(function(){ post_note_edits() }, 60000); // autosave every minute
   });
 
   var active_element = null;
@@ -46,6 +47,8 @@
             set_user_dialog('Saved');
             note_id = new_note.id;
             currently_ajaxing = false;
+            clearInterval(autosave_interval);
+            autosave_interval = setInterval(function(){ post_note_edits() }, 60000);
           }
         });
       } else {
@@ -63,6 +66,8 @@
           success: function(note) {
             set_user_dialog('Saved');
             currently_ajaxing = false;
+            clearInterval(autosave_interval);
+            autosave_interval = setInterval(function(){ post_note_edits() }, 60000);
           }
         });
       }
