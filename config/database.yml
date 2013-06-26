@@ -20,7 +20,6 @@ test:
 
 production:
   adapter: mysql2
-  host: localhost:4432
   database: notes
   user: root
   pool: 5
