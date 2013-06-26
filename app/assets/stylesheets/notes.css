@@ -57,4 +57,5 @@ body {
   border-color: Transparent;
   overflow: auto;
   outline: none;
+  resize: none !important;
 }

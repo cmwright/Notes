@@ -4,8 +4,8 @@
 <script type="text/javascript">
   var autosave_interval = null;
   $(function() {
-
     $(".note_content_container").autosize();
+    $(".note_title_container").attr('contenteditable', 'true').focus();
 
     $(".editable_field").click(function(){
       $(this).attr('contentEditable', true);
@@ -34,6 +34,10 @@
       currently_ajaxing = true;
       var note_title = $(".note_title_container").text();
       var note_content = $(".note_content_container").val();
+
+      if (note_title === 'Untitled Note' && note_content === 'Content') {
+        return;
+      }
 
       if (note_id === null) {
         // first post of the note
