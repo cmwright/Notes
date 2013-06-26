@@ -1,6 +1,6 @@
 body {
-  font-family: 'Open Sans', Courier, monospace;
-  margin-left: 300px;
+  font-family: 'Oxygen Mono', sans-serif;
+  margin-left: 200px;
   width: 60%;
 }
 
@@ -11,12 +11,10 @@ body {
 }
 
 .note_summary_container {
-  padding: 10px;
   position: relative;
 }
 
 .note_summary_title {
-  padding-right: 10px;
   font-weight: bold;
 }
 
@@ -31,7 +29,6 @@ body {
 }
 
 .editable_field {
-  padding: 15px;
   font-size: 20px;
   color: #424242;
   outline: 0px solid transparent;
@@ -40,4 +37,15 @@ body {
 .note_title_container {
   font-weight: bold;
   font-size: 150%;
+}
+
+.note_content_container {
+  margin-top: 20px;
+  width: 870px;
+  font-family: 'Oxygen Mono', sans-serif;
+  font-size: 18px;
+  border-style: none;
+  border-color: Transparent;
+  overflow: auto;
+  outline: none;
 }

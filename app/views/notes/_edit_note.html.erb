@@ -1,7 +1,11 @@
 <%= javascript_include_tag "mousetrap.js" %>
+<%= javascript_include_tag "jquery.autosize.js" %>
+
 <script type="text/javascript">
   var autosave_interval = null;
   $(function() {
+
+    $(".note_content_container").autosize();
 
     $(".editable_field").click(function(){
       $(this).attr('contentEditable', true);
@@ -29,7 +33,7 @@
       set_user_dialog('Saving...');
       currently_ajaxing = true;
       var note_title = $(".note_title_container").text();
-      var note_content = $(".note_content_container").html();
+      var note_content = $(".note_content_container").val();
 
       if (note_id === null) {
         // first post of the note
@@ -87,5 +91,5 @@
 </script>
 
 <div class='note_title_container editable_field'><%= @note.title %></div>
-<div class='note_content_container editable_field'><%= raw @note.content %></div>
+<textarea class='note_content_container'><%= @note.content %></textarea>
 <div class='user_dialog'></div>
