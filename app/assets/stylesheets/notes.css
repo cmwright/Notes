@@ -12,6 +12,7 @@ body {
 
 .note_summary_container {
   position: relative;
+  padding-bottom: 10px;
 }
 
 .note_summary_title {
@@ -20,12 +21,19 @@ body {
 
 .delete_note {
   position: absolute;
-  top: 4px;
-  right: -2px;
+  top: 0px;
+  right: 3px;
   border: 1px solid black;
-  padding: 0px 6px;
+  padding: 0px 3px;
   font-size: 10px;
   cursor: pointer;
+}
+
+.new_note_button {
+  margin-top: 10px;
+  padding: 2px 8px;
+  border: 1px solid black;
+  text-decoration: none;
 }
 
 .editable_field {
@@ -37,6 +45,7 @@ body {
 .note_title_container {
   font-weight: bold;
   font-size: 150%;
+  margin-top: 15px;
 }
 
 .note_content_container {

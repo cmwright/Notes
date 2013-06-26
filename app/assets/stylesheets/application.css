@@ -11,3 +11,19 @@
  *= require_self
  *= require_tree .
 */
+
+
+.sidebar {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  font-size: 30px;
+}
+
+.sidebar a {
+  text-decoration: none;
+}
+
+.sidebar_new_item {
+  margin-left: 2px;
+}

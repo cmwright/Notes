@@ -22,7 +22,9 @@
   <div class='note_summary_container'>
     <span class='note_summary_title'><%= link_to note.title, edit_note_path(note.id) %></span>
     <span class='note_summary_content'><%= strip_tags note.content.truncate(180) %></span>
-    <div class='delete_note' data-id='<%= note.id %>'>X</div>
+    <div class='delete_note' data-id='<%= note.id %>'><i class='icon-remove'></i></div>
   </div>
 <% end %>
-<%= link_to 'Create a Note', new_note_path %>
+<%= link_to new_note_path, :class => 'new_note_button' do %>
+  <i class='icon-plus'></i> New Note
+<% end %>
