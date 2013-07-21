@@ -5,7 +5,6 @@
   var autosave_interval = null;
   $(function() {
     set_content_spacing();
-    $(".note_content_container").autosize();
 
     $(".note_title_container").attr('contenteditable', 'true').focus();
 
@@ -100,8 +99,10 @@
     var pixels_per_row = 25;
 
     var rows_to_add = Math.round((window_height / 2) / pixels_per_row);
-    var old_text = $(".note_content_container").text();
-    $(".note_content_container").text(old_text + "\n".repeat(rows_to_add));
+    $(".note_content_container").autosize({append: "\n".repeat(rows_to_add)});
+
+    // weird hack to get the autosizing with bottom padding correct
+    setTimeout(function(){ $(".note_content_container").trigger("autosize.resize") }, 500);
   }
 </script>
 
