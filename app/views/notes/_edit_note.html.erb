@@ -7,6 +7,15 @@
     set_content_spacing();
 
     $(".note_title_container").attr('contenteditable', 'true').focus();
+    $(".note_title_container").on('keypress', function() {
+      this.innerText = this.innerText.replace("Untitled Note", "");
+    });
+
+    $(".note_content_container").click(function() {
+      if (this.value.indexOf('Content') === 0) {
+        this.value = this.value.replace(/^Content/, "");
+      }
+    });
 
     $(".editable_field").click(function(){
       $(this).attr('contentEditable', true);
