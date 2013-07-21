@@ -4,7 +4,9 @@
 <script type="text/javascript">
   var autosave_interval = null;
   $(function() {
+    set_content_spacing();
     $(".note_content_container").autosize();
+
     $(".note_title_container").attr('contenteditable', 'true').focus();
 
     $(".editable_field").click(function(){
@@ -33,7 +35,7 @@
       set_user_dialog('Saving...');
       currently_ajaxing = true;
       var note_title = $(".note_title_container").text();
-      var note_content = $(".note_content_container").val();
+      var note_content = $(".note_content_container").val().replace(/\n+$/, "\n");
 
       if (note_title === 'Untitled Note' && note_content === 'Content') {
         return;
@@ -91,6 +93,15 @@
     setTimeout(function() {
       $(".user_dialog" + this_message_id).fadeOut();
     }, 2000);
+  }
+
+  function set_content_spacing() {
+    var window_height = $(window).height();
+    var pixels_per_row = 25;
+
+    var rows_to_add = Math.round((window_height / 2) / pixels_per_row);
+    var old_text = $(".note_content_container").text();
+    $(".note_content_container").text(old_text + "\n".repeat(rows_to_add));
   }
 </script>
 

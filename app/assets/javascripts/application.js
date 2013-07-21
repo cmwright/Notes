@@ -13,3 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+String.prototype.repeat = function(num) {
+    return new Array(num + 1).join(this);
+}
