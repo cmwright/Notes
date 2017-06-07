@@ -3,12 +3,14 @@
 
 <script type="text/javascript">
   var autosave_interval = null;
+  var default_title = "Untitled Note";
   $(function() {
     set_content_spacing();
 
     $(".note_title_container").attr('contenteditable', 'true').focus();
     $(".note_title_container").on('keypress', function() {
-      this.innerText = this.innerText.replace("Untitled Note", "");
+      if (this.innerText.indexOf(default_title) !== 0) return;
+      this.innerText = this.innerText.replace(default_title, "");
     });
 
     $(".note_content_container").click(function() {
